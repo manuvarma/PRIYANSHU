@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Trading Hack</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+        body {
+            background: #0c0c0c;
+            color: #00ffea;
+            overflow: hidden;
+        }
+        #bgFrame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: -1;
+        }
+        #open {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 70px;
+            height: 70px;
+            background: #0077ff;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            line-height: 70px;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #0077ff;
+            cursor: pointer;
+        }
+        #dialogBox {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 270px;
+            background: rgba(15, 15, 15, 0.95);
+            border: 2px solid #00cc66;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 12px #00cc66;
+            display: none;
+            cursor: grab;
+        }
+        .closeBtn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: red;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 6px red;
+        }
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            color: white;
+        }
+        .title img {
+            width: 18px;
+            height: 18px;
+        }
+        .button {
+            background: #00cc66;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 12px;
+            width: 100%;
+        }
+        .button:hover {
+            background: #00994d;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            animation: pop 0.4s ease-in-out infinite alternate;
+        }
+        @keyframes pop {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <iframe id="bgFrame" src="https://okwinslots3.com/#/register?invitationCode=7433710747671"></iframe>
+
+    <div id="open">Open Hack</div>
+
+    <div id="dialogBox">
+        <button class="closeBtn" id="closeBtn">X</button>
+        <div class="title" id="dragArea">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+            <span>TEAM PRIYANSHU HACK</span>
+        </div>
+        <p>Period: <span id="periodNumber"></span></p>
+        <p>Timer: <span id="timerText"></span></p>
+        <p>Result: <span class="result" id="resultText"></span></p>
+        <button class="button" id="joinTelegram">Join Telegram</button>
+        <p style="font-size: 10px;">New account इसी hack से बना कर 1000 deposit करें तभी hack work करेगी</p>
+    </div>
+
+    <script>
+        let openBtn = document.getElementById("open");
+        let dialogBox = document.getElementById("dialogBox");
+        let closeBtn = document.getElementById("closeBtn");
+        let joinTelegramBtn = document.getElementById("joinTelegram");
+        let dragArea = document.getElementById("dragArea");
+
+        const telegramLink = "aHR0cHM6Ly90Lm1lLytsa1paNDlzclJscGhPRFps";
+
+        openBtn.onclick = () => {
+            dialogBox.style.display = "block";
+        };
+
+        closeBtn.onclick = () => {
+            dialogBox.style.display = "none";
+        };
+
+        joinTelegramBtn.onclick = () => {
+            window.open(atob(telegramLink), "_blank");
+        };
+
+        function updatePeriodAndTimer() {
+            let now = new Date();
+            let year = now.getUTCFullYear();
+            let month = String(now.getUTCMonth() + 1).padStart(2, '0');
+            let day = String(now.getUTCDate()).padStart(2, '0');
+            let hours = now.getUTCHours();
+            let minutes = now.getUTCMinutes();
+            let seconds = now.getUTCSeconds();
+            let totalMinutes = hours * 60 + minutes;
+
+            let periodNum = `${year}${month}${day}1000${10001 + totalMinutes}`;
+            document.getElementById("periodNumber").innerText = periodNum;
+
+            let lastTwoDigits = periodNum.slice(-2);
+            let sum = [...lastTwoDigits].reduce((a, b) => a + parseInt(b), 0);
+            if (sum > 9) sum = [...String(sum)].reduce((a, b) => a + parseInt(b), 0);
+
+            let result = sum >= 5 ? "BIG" : "SMALL";
+            document.getElementById("resultText").innerHTML = `<span style="color:${sum >= 5 ? 'lime' : 'yellow'};">${result}</span>`;
+
+            let remainingSeconds = 60 - seconds;
+            document.getElementById("timerText").innerText = `00:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        setInterval(updatePeriodAndTimer, 1000);
+        updatePeriodAndTimer();
+
+        // Drag Functionality
+        let isDragging = false, offsetX, offsetY;
+
+        dragArea.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - dialogBox.getBoundingClientRect().left;
+            offsetY = e.clientY - dialogBox.getBoundingClientRect().top;
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                dialogBox.style.left = `${e.clientX - offsetX}px`;
+                dialogBox.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+        });
+
+        // Touch Support for Mobile
+        dragArea.addEventListener("touchstart", (e) => {
+            isDragging = true;
+            let touch = e.touches[0];
+            offsetX = touch.clientX - dialogBox.getBoundingClientRect().left;
+            offsetY = touch.clientY - dialogBox.getBoundingClientRect().top;
+        });
+
+        document.addEventListener("touchmove", (e) => {
+            if (isDragging) {
+                let touch = e.touches[0];
+                dialogBox.style.left = `${touch.clientX - offsetX}px`;
+                dialogBox.style.top = `${touch.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener("touchend", () => {
+            isDragging = false;
+        });
+    </script>
+
+</body>
+</html>
